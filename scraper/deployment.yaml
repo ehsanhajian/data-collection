@@ -12,13 +12,15 @@ spec:
       labels:
         app: temperature-scraper
     spec:
+      imagePullSecrets:
+      - name: do-registry
       containers:
-        - name: temperature-scraper
-          image: registry.digitalocean.com/ehsanhajian/temperature-scraper:latest
-          resources:
-            requests:
-              memory: "64Mi"
-              cpu: "250m"
-            limits:
-              memory: "128Mi"
-              cpu: "500m"
+      - name: temperature-scraper
+        image: registry.digitalocean.com/ehsanhajian/temperature-scraper:latest
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
