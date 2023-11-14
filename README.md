@@ -75,13 +75,13 @@ Install the operator in the kafka namespace:
 ```bash
 helm install strimzi-operator strimzi/strimzi-kafka-operator --namespace kafka
 ```
+
 Check the operator deployment:
-‍‍‍```bash
+```bash
 kubectl get pods -n kafka
 ```
-
-Deploy the Kafka cluster:
-‍‍‍```bash
+Deploy the Kafka Cluster
+```bash
 kubectl apply -f kafka-cluster.yaml -n kafka
 ```
 
