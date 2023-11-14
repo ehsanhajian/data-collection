@@ -192,13 +192,13 @@ kubectl apply -f deployment.yaml
 
 ### Application Flow
 
-## Scraper App: 
+#### Scraper App: 
    Collects temperature data and sends it to the Kafka topic temperature-data.
-## Kafka:
+#### Kafka:
    Serves as a message broker, holding the temperature data in the temperature-data topic.
-## Kafka Consumer App:
+#### Kafka Consumer App:
    Consumes data from the Kafka topic and inserts it into TimescaleDB.
-## TimescaleDB:
+#### TimescaleDB:
 Stores the temperature data persistently.This Kafka consumer application acts as a crucial link between real-time data collection and long-term data storage, facilitating efficient data processing and storage workflows.
 
 
