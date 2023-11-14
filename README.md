@@ -3,7 +3,7 @@
 ## Overview
 This project contains a Python script (`scraper.py`) for fetching temperature data from various cities, a Dockerfile for containerizing the application, and Kubernetes deployment configurations for orchestrating the service.
 
-### Scraper.py
+### scraper.py
 This Python script fetches temperature data for predefined cities (Zurich, London, Miami, Tokyo, Singapore) using the `requests` library. It sends this data to a Kafka topic using the `confluent_kafka` library.
 
 **Key Features:**
