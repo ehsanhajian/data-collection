@@ -51,10 +51,6 @@ After these steps, the temperature data scraper should be running in your Kubern
 ## Overview
 This guide covers the setup of a Kafka cluster in a Kubernetes environment using the Strimzi operator via Helm. Due to limited resources, Zookeeper is deployed within Kubernetes instead of using a DBaaS solution.
 
-## Prerequisites
-- A Kubernetes cluster
-- Helm installed
-- `kubectl` command-line tool
 
 ## Installation Steps
 
@@ -203,10 +199,6 @@ Stores the temperature data persistently.This Kafka consumer application acts as
 ## Overview
 This guide covers the setup of Prometheus and Grafana for monitoring Kubernetes cluster metrics and Loki along with Promtail for log management. Helm charts are used for installation and configuration of these services.
 
-## Prerequisites
-- A Kubernetes cluster
-- Helm installed
-- `kubectl` command-line tool
 
 ## Installation Steps
 
