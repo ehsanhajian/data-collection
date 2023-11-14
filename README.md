@@ -99,7 +99,7 @@ Check the created topic:
 ```bash
 kubectl get kafkatopics -n kafka
 ```
-Note on Zookeeper Deployment
+**Note on Zookeeper Deployment**
 While deploying Zookeeper as a DBaaS is typically preferred for production environments, in this setup, Zookeeper is deployed within the Kubernetes cluster due to resource limitations. This approach simplifies management but may not be ideal for high-scale production use.
 
 # TimescaleDB Deployment in Kubernetes
