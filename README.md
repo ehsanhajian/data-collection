@@ -168,3 +168,37 @@ This Kafka consumer application receives temperature data from a Kafka topic and
 The `kafka-consumer.py` script consumes messages from a Kafka topic and inserts the data into a TimescaleDB database.
 
 
+### Deployment Instructions
+
+- Build the Docker image: `docker build -t your-registry/kafka-consumer:latest .`
+- Push it to your container registry: `docker push your-registry/kafka-consumer:latest`
+
+Create Necessary Credentials:
+Create a Kubernetes configMap app-config with Kafka and DB configuration details.
+```bash
+kubectl create secret generic db-credentials --from-literal=password=<yourpass>
+kubectl create configmap app-config --from-literal=host=timescaledb --from-literal=database=temperature --from-literal=user=postgres --from-literal=kafka_bootstrap_servers="my-kafka-cluster-kafka-bootstrap.kafka.svc.cluster.local:9092"
+```
+
+Create a Kubernetes secret db-credentials with the TimescaleDB password.
+```bash
+kubectl create secret generic timescaledb-secret --from-literal=password=<yourpass>
+```
+
+Apply the Kubernetes deployment YAML:
+```bash
+kubectl apply -f deployment.yaml
+```
+
+### Application Flow
+
+## Scraper App: 
+   Collects temperature data and sends it to the Kafka topic temperature-data.
+## Kafka:
+   Serves as a message broker, holding the temperature data in the temperature-data topic.
+## Kafka Consumer App:
+   Consumes data from the Kafka topic and inserts it into TimescaleDB.
+## TimescaleDB:
+Stores the temperature data persistently.This Kafka consumer application acts as a crucial link between real-time data collection and long-term data storage, facilitating efficient data processing and storage workflows.
+
+
