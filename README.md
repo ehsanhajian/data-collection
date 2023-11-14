@@ -9,13 +9,9 @@ This Python script fetches temperature data for predefined cities (Zurich, Londo
 **Key Features:**
 - Fetches temperature data from `wttr.in`.
 - Uses Kafka Producer for data transmission.
-- Continuous data retrieval with error handling.
-
-### Dockerfile
-Sets up the environment for running the scraper script in a Docker container.
+- Continuous data retrieval with error handling every 5 minutes.
 
 **Key Elements:**
-- Based on Python 3.8 official image.
 - Installs `requests` and `confluent-kafka` libraries.
 - Configured to execute the scraper script.
 
