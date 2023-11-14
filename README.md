@@ -202,3 +202,89 @@ kubectl apply -f deployment.yaml
 Stores the temperature data persistently.This Kafka consumer application acts as a crucial link between real-time data collection and long-term data storage, facilitating efficient data processing and storage workflows.
 
 
+# Monitoring Kubernetes with Prometheus and Grafana, and Log Management with Loki
+
+## Overview
+This guide covers the setup of Prometheus and Grafana for monitoring Kubernetes cluster metrics and Loki along with Promtail for log management. Helm charts are used for installation and configuration of these services.
+
+## Prerequisites
+- A Kubernetes cluster
+- Helm installed
+- `kubectl` command-line tool
+
+## Installation Steps
+
+### 1. Adding Helm Repositories
+
+1. **Add Prometheus Helm Repository:**
+   ```bash
+   helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+   helm repo update
+
+   Add Grafana Helm Repository:
+```bash
+helm repo add grafana https://grafana.github.io/helm-charts
+helm repo update
+```
+
+Create a namespace for Prometheus:
+```bash
+kubectl create namespace prometheus
+```
+
+Install Prometheus:
+```bash
+helm install prometheus prometheus-community/prometheus --namespace prometheus
+```
+
+
+Check the deployed pods:
+```bash
+kubectl get pods -n prometheus
+```
+
+Create a namespace for Grafana:
+```bash
+kubectl create namespace grafana
+```
+
+Install Grafana:
+```bash
+helm install grafana grafana/grafana --namespace grafana
+```
+
+Accessing Grafana Dashboard:
+```bash
+kubectl port-forward service/grafana 3000:80 -n grafana
+```
+Access Grafana at http://localhost:3000. Default login is admin and the password can be retrieved by:
+```bash
+kubectl get secret --namespace grafana grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
+```
+
+
+Loki for log aggregation:
+```bash
+helm install loki grafana/loki-stack --namespace grafana
+```
+
+Promtail for shipping logs to Loki:
+```bash
+helm upgrade --install promtail grafana/promtail --namespace grafana --set loki.serviceName=loki
+```
+
+Verify Loki and Promtail Installation:
+```bash
+kubectl get pods -n grafana
+```
+
+ Configuring Grafana to Use Prometheus and Loki
+Add Prometheus as a Data Source:
+In the Grafana dashboard, navigate to Configuration > Data Sources.
+Click "Add data source", and select Prometheus.
+Set the URL to http://prometheus-server.prometheus.svc.cluster.local and save.
+Add Loki as a Data Source:
+Similarly, add Loki as a data source.
+Set the URL to http://loki:3100 and save
+
+
